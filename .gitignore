@@ -1,0 +1,44 @@
+# Environment files & Secrets
+.env
+*.env
+!.env.example
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.venv*/
+.pytest_cache/
+
+# Node / Frontend Dependencies & Builds
+node_modules/
+dist/
+build/
+.vite/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded Files
+uploads/*
+!uploads/.gitkeep
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/uploads/tickets/*
+!backend/uploads/tickets/.gitkeep
+
+# IDE & Editor Files
+.vscode/
+.idea/
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# Archives & Logs
+*.zip
+*.log
