@@ -144,6 +144,9 @@ graph TD
     FastAPI --> DB
 ```
 
+> 📖 **Detailed Architectural Documentation**: For comprehensive sequence diagrams, database schemas, RBAC access control flows, and AI assistant state-machines, [View detailed architecture](docs/architecture.md).
+
+
 ---
 
 ## 🔌 API Endpoint Summary
