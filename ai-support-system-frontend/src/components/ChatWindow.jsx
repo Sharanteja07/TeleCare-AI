@@ -41,7 +41,22 @@ export const ChatWindow = ({ ticketId, currentUser, readonly = false }) => {
     fetchHistory();
 
     const token = localStorage.getItem('token') || localStorage.getItem('access_token');
-    const wsUrl = `ws://127.0.0.1:8000/api/chat/ws/${ticketId}?token=${token}`;
+    const apiBase = import.meta.env.VITE_API_BASE_URL || '';
+    let wsHost = '127.0.0.1:8000';
+    let wsProtocol = typeof window !== 'undefined' && window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+
+    if (apiBase.startsWith('http://') || apiBase.startsWith('https://')) {
+      try {
+        const urlObj = new URL(apiBase);
+        wsHost = urlObj.host;
+        wsProtocol = urlObj.protocol === 'https:' ? 'wss:' : 'ws:';
+      } catch (e) { /* fallback */ }
+    } else if (typeof window !== 'undefined' && window.location.host) {
+      wsHost = window.location.host;
+    }
+
+    const wsUrl = import.meta.env.VITE_WS_URL || `${wsProtocol}//${wsHost}/api/chat/ws/${ticketId}?token=${token}`;
+
 
     const connect = () => {
       try {
