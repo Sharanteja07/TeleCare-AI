@@ -1,205 +1,80 @@
-# 📱 TeleCare AI — SIM Customer Support Portal
+# TeleCare AI — SIM Customer Support Portal
 
 ![TeleCare AI](https://img.shields.io/badge/TeleCare%20AI-SIM%20Customer%20Support-00E676?style=for-the-badge)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
 
-TeleCare AI is a full-stack SIM-focused customer support platform that allows customers to report SIM-related problems, receive AI-assisted guidance, communicate through support workflows, and receive assistance from support engineers.
+TeleCare AI is a full-stack, SIM-focused web-based customer support platform. It allows telecom customers to raise SIM support tickets, interact with an AI assistant for instant troubleshooting, and escalate complex issues to human support engineers.
 
-The system provides separate workflows for:
+The platform provides separate role-based workflows for:
 - **Customer**
-- **Engineer**
+- **Support Engineer**
 - **Admin**
 
 ---
 
-## 🌐 Live Demo
+## 🌐 Live Production Deployment
 
-> Live deployment is currently being prepared. The application can be run locally using the setup instructions below.
-
-### Backend API
-The FastAPI backend is available locally and interactive Swagger documentation is available at:
-- **Swagger UI**: `http://127.0.0.1:8000/docs`
-- **ReDoc**: `http://127.0.0.1:8000/redoc`
+- **Production Backend API**: [https://telecare-ai.onrender.com](https://telecare-ai.onrender.com)
+- **Interactive Swagger Docs**: [https://telecare-ai.onrender.com/docs](https://telecare-ai.onrender.com/docs)
+- **OpenAPI Schema**: [https://telecare-ai.onrender.com/openapi.json](https://telecare-ai.onrender.com/openapi.json)
+- **Health Check**: [https://telecare-ai.onrender.com/health](https://telecare-ai.onrender.com/health)
 
 ---
 
-## 🔄 How TeleCare AI Works
+## ✨ Features
 
-```text
-Customer
-   ↓
-Login
-   ↓
-Customer Dashboard
-   ↓
-Create SIM Support Ticket
-   ↓
-AI Assistant provides SIM-related guidance
-   ↓
-Ticket submitted
-   ↓
-Admin reviews ticket
-   ↓
-Admin assigns Engineer
-   ↓
-Engineer receives assigned ticket
-   ↓
-Engineer works on ticket
-   ↓
-Ticket resolved
-   ↓
-Customer receives updated status
-   ↓
-Customer submits feedback
-   ↓
-Admin reviews analytics
-```
+### 👤 Customer
+- **Authentication**: Registration, Login, and JWT Bearer token security.
+- **Customer Dashboard**: Overview of personal tickets, quick actions, and status metrics.
+- **Profile**: View and manage customer profile information.
+- **Create SIM Support Ticket**: Pre-filled SIM category selection with validation.
+- **Ticket Management**: View active tickets, track status progress, and open ticket details.
+- **Notifications**: Real-time notifications for status updates and engineer notes.
+- **TeleCare AI Assistant**: Instant 24/7 SIM troubleshooting assistant with action buttons.
+- **Feedback & Rating**: Rate resolved tickets with 1 to 5-star ratings and written reviews.
+- **Evidence Uploads**: Secure PNG, JPG, and PDF document/image attachment uploads.
 
-### Detailed Workflow Steps
+### 🛠️ Support Engineer
+- **Engineer Login**: Dedicated single sign-on access.
+- **Engineer Dashboard**: View assigned tickets filtered dynamically by backend RBAC authorization.
+- **Ticket Investigation**: View customer details, issue descriptions, and evidence attachments.
+- **Status Updates**: Transition ticket statuses (`In Progress`, `Resolved`, `Closed`).
+- **Internal Notes**: Record investigation notes for internal tracking and customer review.
+- **Activity History**: View auto-generated ticket activity audit logs.
 
-1. **Customer Registration & Login**: Customers authenticate securely via single sign-on at `/` using JWT token authentication.
-2. **Customer Dashboard**: Customers view active SIM tickets, submit new tickets, and launch the TeleCare AI Assistant.
-3. **Ticket Creation & AI Assistance**: Customers describe their issue or interact with the AI assistant for instant SIM troubleshooting or automated ticket pre-filling.
-4. **Ticket Submission**: The ticket is created with category, priority, description, and optional file attachments (PNG, JPG, PDF).
-5. **Admin Review & Assignment**: Administrators open the Admin Portal to review unassigned tickets and assign qualified support engineers.
-6. **Engineer Resolution Workflow**: Assigned engineers view assigned tickets in their portal, review investigation notes, inspect attachments, communicate via live chat, and update ticket status to `In Progress` or `Resolved`.
-7. **Customer Notification & Feedback**: Customers see real-time status updates on their dashboard and submit rating feedback upon resolution.
-8. **Admin Analytics**: Administrators monitor system performance, resolution velocity, category trends, and customer satisfaction metrics.
+### 👑 Admin
+- **Admin Login**: Enterprise administrative access.
+- **Admin Dashboard**: System-wide ticket volume, workload breakdown, and status distribution.
+- **User & Customer Management**: View customer registries and active engineers.
+- **Engineer Assignment**: Assign unassigned tickets to support engineers.
+- **System Analytics**: Real-time KPI stats, category distributions, monthly trends, and customer satisfaction metrics.
 
----
+### 🤖 AI Assistant (SIM-Only Scope)
+The **TeleCare AI Assistant** is an automated conversational agent specifically tailored for **SIM-related customer support**.
 
-## 👥 User Roles
+- **Supported SIM Topics**:
+  - SIM card not working / No SIM signal
+  - Lost or stolen SIM card (immediate block request)
+  - Damaged or scratched SIM card
+  - Physical SIM replacement requests
+  - SIM activation troubleshooting
+  - SIM blocked / PUK code guidance
+  - eSIM installation & QR code profile issues
+  - Mobile Number Portability (MNP)
 
-### Customer
-- Register / Login via Universal Login.
-- View personal customer dashboard and active ticket summaries.
-- Create SIM support tickets with pre-filled categories.
-- Search and filter personal support tickets.
-- Upload document/image evidence attachments securely.
-- Interact with **TeleCare AI Assistant** for automated SIM guidance.
-- Track real-time ticket status updates and resolution progress.
-- Submit rating feedback and reviews upon ticket resolution.
+- **Polite Non-SIM Scope Redirection**:  
+  To maintain high support quality, non-SIM inquiries (Wi-Fi, router, broadband, fiber, weather, laptop, or printer support) are politely redirected:
+  > *"Hi! I am your TeleCare AI Assistant. I specialize exclusively in SIM-related support (SIM activation, replacement, lost/damaged SIMs, eSIM, PIN/PUK, and mobile network settings). For non-SIM services, please contact general support."*
 
-### Engineer
-- Login via Universal Login.
-- View assigned tickets in Engineer Dashboard.
-- Open detailed ticket view with customer details and evidence.
-- Review customer issue description and file attachments.
-- Save internal investigation notes.
-- Update ticket status (`In Progress`, `Resolved`, `Closed`).
-- Engage in real-time chat with customers.
-
-### Admin
-- Login via Universal Login.
-- View all enterprise customer support tickets.
-- Search and filter tickets by status, priority, category, or customer.
-- Assign support engineers to unassigned tickets.
-- Monitor overall ticket progress and workload distribution.
-- View real-time analytics (ticket volume, resolution rate, category distribution).
-- Review customer feedback and rating distribution.
-- Manage enterprise customer support workflows.
-
----
-
-## 🤖 TeleCare AI Assistant
-
-The **TeleCare AI Assistant** is an intelligent conversational agent intentionally restricted to SIM-related customer support.
-
-### Supported SIM Domains
-- SIM card not working / No SIM detected
-- No mobile network signal / No Service
-- Lost SIM card / Block lost SIM
-- Damaged / Scratched SIM card
-- Physical SIM replacement request
-- SIM activation troubleshooting
-- SIM blocked / Locked SIM
-- PIN & PUK code verification guidance
-- eSIM installation & QR code profile issues
-- Mobile Number Portability (MNP)
-
-### Unrelated Query Redirection
-To maintain high support quality, queries outside the SIM domain are politely redirected:
-- Wi-Fi / Wireless setup
-- Router configuration / Reset
-- Broadband / Fiber internet
-- Weather & General inquiries
-- Printer & Laptop hardware support
-
-> *Example Assistant Response for Unrelated Queries*:  
-> *"Hi! I am your TeleCare AI Assistant. I specialize exclusively in SIM-related support (SIM activation, replacement, lost/damaged SIMs, eSIM, PIN/PUK, and mobile network settings). For non-SIM services, please contact general support."*
-
----
-
-## 📸 Application Screenshots
-
-Application screenshots demonstrate each user portal and workflow:
-
-### Login
-- Universal Login Page (`/`) — *Multi-role access*
-
-### Customer Portal
-- Customer Dashboard (`/dashboard`)
-- Create Support Ticket (`/dashboard/tickets/create`)
-- My Tickets History (`/dashboard/tickets`)
-- TeleCare AI Assistant (`/dashboard/chat`)
-- Customer Profile (`/profile`)
-
-### Admin Portal
-- Admin Dashboard (`/admin/dashboard`)
-- Ticket Management & Search (`/admin/tickets`)
-- Engineer Assignment Modal (`/admin/tickets/:id`)
-- System Analytics & Feedback (`/admin/analytics`)
-
-### Engineer Portal
-- Engineer Dashboard (`/engineer/dashboard`)
-- Assigned Tickets (`/engineer/tickets`)
-- Ticket Investigation & Notes (`/engineer/tickets/:id`)
-- Status Resolution Workflow
-
-*(Screenshots can be added to the `docs/screenshots/` directory)*
-
----
-
-## 🏗️ System Architecture
-
-### Component Data Flow
-
-```text
-React + Vite (Frontend)
-       ↓
-Axios / HTTP (JWT Bearer Token)
-       ↓
-FastAPI (Backend Router)
-       ↓
-REST APIs / WebSockets
-       ↓
-SQLAlchemy (ORM Layer)
-       ↓
-SQLite Database (telecom_support.db)
-```
-
-### Security & Access Control Flow
-
-```text
-User Credentials
-       ↓
-POST /api/auth/login
-       ↓
-FastAPI OAuth2 / PyJWT (HS256)
-       ↓
-Role Enforcement Middleware (Customer / Engineer / Admin)
-       ↓
-Protected Endpoint Access
-```
-
-### Support Lifecycle Flow
-
-```text
-Customer (Creates Ticket) → Ticket ("Open") → Admin (Assigns Engineer) → Ticket ("In Progress") → Engineer (Resolves Issue) → Ticket ("Resolved") → Customer (Submits Feedback)
-```
+### 🔘 AI Action Buttons
+When a user reports critical issues such as `"I lost my SIM"`, the assistant generates distinct, interactive visual buttons:
+- `[ Block Lost SIM ]` — Initiates immediate SIM block workflow.
+- `[ Request Replacement ]` — Directs customer to ticket creation with pre-filled category.
+- `[ Contact Support Engineer ]` — Escalates request directly to a support engineer.
 
 ---
 
@@ -208,101 +83,163 @@ Customer (Creates Ticket) → Ticket ("Open") → Admin (Assigns Engineer) → T
 ### Frontend
 - **Framework**: React 18
 - **Build Tool**: Vite
-- **HTTP Client**: Axios (with JWT interceptors)
-- **Icons**: Lucide React
+- **Language**: JavaScript (ES6+)
 - **Styling**: Vanilla CSS & Tailwind CSS (Custom Dark Telecom Theme)
+- **HTTP Client**: Axios (with JWT interceptors)
 
 ### Backend
-- **Framework**: Python 3.10+ & FastAPI
+- **Language**: Python 3.10+
+- **Framework**: FastAPI
 - **ORM**: SQLAlchemy
+- **Database**: PostgreSQL (Production) / SQLite (Local Development)
 - **Authentication**: PyJWT (HS256) & Passlib (`pbkdf2_sha256`)
-- **Real-Time Messaging**: WebSockets (`websockets`)
-- **Testing**: Pytest & FastAPI TestClient
+- **Real-Time**: WebSockets (`websockets`)
 
-### Database
-- **SQLite**: Configured for local development (`telecom_support.db`) / PostgreSQL ready
-
----
-
-## 🔌 API Documentation
-
-FastAPI automatically generates interactive OpenAPI documentation when the backend server is running locally:
-
-- **Swagger UI**: `http://127.0.0.1:8000/docs`
-- **ReDoc**: `http://127.0.0.1:8000/redoc`
-
-### Major API Router Groups
-
-| API Router | Base Endpoint | Access | Functionality |
-| :--- | :--- | :--- | :--- |
-| **Authentication** | `/api/auth` | Public | Register user, Login & obtain JWT token |
-| **Users** | `/api/users` | Protected | Current user lookup (`/me`) and user management |
-| **Tickets** | `/api/tickets` | Protected (RBAC) | Create, query, assign engineer, update status |
-| **Attachments** | `/api/tickets/{id}/attachments` | Protected | File upload, list, download, and deletion |
-| **Chat** | `/api/chat` | Protected | Send ticket messages, history & WebSockets real-time stream |
-| **Feedback** | `/api/feedback` | Protected | Submit rating reviews & retrieve feedback |
-| **Analytics** | `/api/analytics` | Admin / Engineer | KPI stats, category breakdown, monthly trends & rating satisfaction |
+### Deployment
+- **Platform**: Render (Cloud Web Service)
 
 ---
 
-## 👥 Team Contributions
+## 🏗️ System Architecture
 
-TeleCare AI was developed as a collaborative group project by a 3-member team:
+```mermaid
+graph TD
+    subgraph Clients
+        C[Customer Portal]
+        E[Engineer Portal]
+        A[Admin Portal]
+    end
 
-| Member | Role | Key Contributions |
-| :--- | :--- | :--- |
-| **Katta Durga Sharan Teja** | Backend Developer | Developed FastAPI backend, REST APIs, database schemas, JWT authentication, Role-Based Access Control (RBAC), ticket management APIs, engineer assignment, file attachments, analytics APIs, backend testing, and security hardening. |
-| **Kanuri Yaswanth Kumar** | Frontend Developer | Built React/Vite frontend, Customer Portal, Engineer Portal, Admin Portal, UI/UX design system, dark telecom layout, responsive components, and frontend API integration. |
-| **Baddireddi Satya Vinay** | AI & Integration Engineer | Designed TeleCare AI Assistant, SIM-only support logic, conversational fallback handling, frontend-backend API integration, end-to-end workflow testing, debugging, and validation. |
+    subgraph Frontend Layer
+        React[React 18 + Vite Application]
+    end
 
----
+    subgraph Communication Layer
+        REST[REST API / Axios - JWT Bearer]
+        WS[WebSockets - Real-time Chat]
+    end
 
-## 📈 Development History
+    subgraph Backend Layer
+        FastAPI[FastAPI Backend Server - app.main:app]
+        Auth[JWT & RBAC Middleware]
+        AI[TeleCare AI Assistant Engine]
+    end
 
-The project evolved through 14 structured development stages:
+    subgraph Database Layer
+        DB[(PostgreSQL / SQLite Database)]
+    end
 
-1. **Project Planning & Domain Scoping**: Defined SIM customer support scope and defined Customer, Engineer, and Admin roles.
-2. **Backend Architecture**: Configured FastAPI project layout, router architecture, dependency injection, and SQLite database connection.
-3. **Database Implementation**: Designed SQLAlchemy ORM models (`User`, `Ticket`, `ChatMessage`, `Attachment`, `Feedback`, `TicketActivity`).
-4. **Authentication & Authorization**: Implemented password hashing (`pbkdf2_sha256`), JWT token creation, and `RoleChecker` dependencies.
-5. **Ticket Management Engine**: Created role-aware ticket CRUD APIs, query filtering, pagination, and status state machine.
-6. **Frontend UI/UX Development**: Built React components, dark glassmorphism styling, navigation headers, and role layouts.
-7. **AI Assistant Integration**: Developed `AIAssistant` component and `AITelecomEngine` with SIM keyword classification and custom action buttons.
-8. **Admin Engineer Assignment**: Integrated `PUT /api/tickets/{id}/assign` workflow allowing admins to delegate unassigned tickets to engineers.
-9. **Secure File Attachments**: Added MIME/extension checking (`.png`, `.jpg`, `.pdf`), UUID file naming, and path traversal protections.
-10. **Analytics & Feedback**: Implemented ratings, feedback submission, category distribution reporting, and engineer workload metrics.
-11. **Security Hardening**: Sanitized hardcoded credentials, isolated secrets in `.env`, and configured CORS origin filters.
-12. **Automated Testing Suite**: Created `pytest` test suite (`backend/tests/test_audit.py`) achieving 100% test pass rate across critical workflows.
-13. **Final UI Quality Pass**: Fixed input autocomplete attributes, action button formatting, and keyboard accessibility.
-14. **GitHub Release**: Initialized Git, created production-ready documentation, and published repository to GitHub.
+    C --> React
+    E --> React
+    A --> React
 
----
+    React --> REST
+    React --> WS
 
-## 🎥 Recommended Demo Flow
+    REST --> Auth
+    WS --> Auth
+    Auth --> FastAPI
 
-Follow this 2–3 minute workflow to demonstrate the full application:
-
-1. **Open Application**: Navigate to `http://localhost:5173/` in your browser.
-2. **Login as Customer**: Sign in using `customer` / `customerpassword`.
-3. **Customer Dashboard**: Review active ticket summary and click **"+ Create Support Ticket"**.
-4. **AI Assistant Interaction**: Open **"Ask AI Support"** (`/dashboard/chat`), type `"I lost my SIM"`, and observe the automated guidance and formatted action buttons.
-5. **Submit Support Ticket**: Create a ticket with Category `"SIM Lost"`, Priority `"High"`, and upload a sample PNG/PDF image.
-6. **Login as Admin**: Logout and log in as `admin` / `adminpassword`.
-7. **Admin Assignment**: Open **Admin Tickets** (`/admin/tickets`), view the newly created unassigned ticket, click **"Assign Ticket"**, select `engineer`, and confirm.
-8. **Login as Engineer**: Logout and log in as `engineer` / `engineerpassword`.
-9. **Engineer Workflow**: Open **Engineer Dashboard** (`/engineer/dashboard`), view the assigned ticket, open ticket details, add internal investigation notes, and update status to **"Resolved"**.
-10. **Verify Customer Resolution**: Logout and log in back as `customer`.
-11. **Submit Feedback**: Open the resolved ticket, confirm status is updated, and submit a 5-star rating feedback.
-12. **Review Admin Analytics**: Log in as `admin` and open **Analytics** (`/admin/analytics`) to observe updated ticket resolution charts and ratings.
+    FastAPI --> AI
+    FastAPI --> DB
+```
 
 ---
 
-## ⚙️ Local Setup
+## 🔌 API Endpoint Summary
 
-### Prerequisites
-- Node.js (v18+)
-- Python (3.10+)
-- Git
+### Authentication (`/api/auth`)
+- `POST /api/auth/register` — Register a new customer account.
+- `POST /api/auth/login` — Authenticate and obtain JWT Bearer access token.
+- `POST /api/auth/otp/send` — Send email OTP code.
+- `POST /api/auth/otp/verify` — Verify OTP code and auto-register.
+- `POST /api/auth/forgot` — Request password reset code.
+- `POST /api/auth/reset` — Reset password using OTP code.
+
+### Users (`/api/users`)
+- `GET /api/users/me` — Retrieve current authenticated user profile.
+- `PUT /api/users/me` — Update user profile details.
+- `GET /api/users` — List all registered users (Admin only).
+- `GET /api/users/customers` — List registered customers (Admin only).
+
+### Tickets (`/api/tickets`)
+- `POST /api/tickets` — Create a new SIM support ticket.
+- `GET /api/tickets` — List support tickets (Filtered by role).
+- `GET /api/tickets/{id}` — Retrieve detailed ticket information.
+- `PUT /api/tickets/{id}` — Update ticket details.
+- `DELETE /api/tickets/{id}` — Delete a ticket (Admin only).
+- `PUT /api/tickets/{id}/assign` — Assign engineer to ticket (Admin/Engineer).
+- `PUT /api/tickets/{id}/status` — Update ticket status (`Open`, `In Progress`, `Resolved`, `Closed`).
+- `PUT /api/tickets/{id}/close` — Close a ticket.
+- `GET /api/tickets/{id}/activities` — Retrieve ticket activity audit history.
+- `PUT /api/tickets/{id}/notes` — Add/update engineer investigation notes.
+
+### Chat (`/api/chat`)
+- `POST /api/chat/send` — Send ticket chat message (Triggers automated AI reply for customers).
+- `GET /api/chat/history/{ticket_id}` — Retrieve chat history for a ticket.
+- `WS /api/chat/ws/{ticket_id}` — Real-time WebSocket chat stream.
+
+### Feedback (`/api/feedback`)
+- `POST /api/feedback` — Submit rating feedback for a resolved ticket.
+- `GET /api/feedback` — Retrieve all customer feedback.
+- `GET /api/feedback/{ticket_id}` — Retrieve feedback for a specific ticket.
+
+### Analytics (`/api/analytics`)
+- `GET /api/analytics/stats` — Overall system KPI statistics.
+- `GET /api/analytics/category-report` — Category distribution breakdown.
+- `GET /api/analytics/monthly-report` — Monthly ticket volume trends.
+- `GET /api/analytics/engineer-performance` — Engineer resolution metrics.
+- `GET /api/analytics/customer-satisfaction` — Customer satisfaction rating reports.
+
+### Attachments (`/api/tickets/.../attachments`)
+- `POST /api/tickets/{ticket_id}/attachments` — Upload image/PDF evidence file.
+- `GET /api/tickets/{ticket_id}/attachments` — List attachments for a ticket.
+- `GET /api/tickets/attachments/{attachment_id}/download` — Secure attachment download.
+- `DELETE /api/tickets/attachments/{attachment_id}` — Delete an attachment.
+
+### Notifications (`/api/notifications`)
+- `GET /api/notifications` — List user notifications.
+- `PUT /api/notifications/{notification_id}/read` — Mark notification as read.
+- `PUT /api/notifications/read-all` — Mark all notifications as read.
+
+### Health Check (`/health`)
+- `GET /health` — Returns `HTTP 200 OK` (`{"status": "healthy", "service": "TeleCare-AI"}`).
+
+---
+
+## 🔐 Authentication & Security
+
+- **JWT Bearer Token Authentication**: Standard header-based token authentication with configurable expiration.
+- **Role-Based Access Control (RBAC)**: Backend dependencies enforce strict access control (`Customer`, `Engineer`, `Admin`).
+- **Protected Routes**: Client-side route guards prevent unauthorized navigation.
+- **Input & File Attachment Protection**: Extension checking (`.png`, `.jpg`, `.jpeg`, `.pdf`), UUID file naming, and `os.path.realpath` path traversal protection.
+- **Environment Isolation**: Private credentials, database connection strings, and secret keys managed strictly via environment variables.
+
+---
+
+## 🗄️ Database
+
+The production application is configured to connect to a **PostgreSQL** database managed via SQLAlchemy ORM.
+
+- **Production Database**: Managed PostgreSQL on Render via environment variable `DATABASE_URL`.
+- **Automatic Compatibility**: Automatic conversion of legacy `postgres://` URIs to `postgresql://` for SQLAlchemy 2.0+ compatibility.
+- **Auto-Seeding**: Initial database startup auto-seeds default roles (`admin`, `engineer`, `customer`) for testing.
+
+---
+
+## 🚀 Render Deployment Setup
+
+The backend is deployed as a Web Service on **Render**:
+
+- **Production URL**: `https://telecare-ai.onrender.com`
+- **Root Directory**: `backend`
+- **Build Command**: `pip install -r requirements.txt`
+- **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+- **Health Check Path**: `/health`
+
+---
+
+## ⚙️ Local Development Setup
 
 ### 1. Backend Setup
 
@@ -322,11 +259,11 @@ source venv/bin/activate
 # Install requirements
 pip install -r requirements.txt
 
-# Create environment configuration
+# Create local environment configuration
 cp .env.example .env
 
 # Start FastAPI backend server
-.\venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+uvicorn app.main:app --reload
 ```
 
 ### 2. Frontend Setup
@@ -344,35 +281,124 @@ npm run dev
 
 ---
 
-## 🔐 Security
+## 🔑 Environment Variables Configuration
 
-- **JWT Authentication**: Standard Bearer token authentication with configurable expiration.
-- **Role-Based Access Control**: Backend-enforced role authorization (`Customer`, `Engineer`, `Admin`) on all endpoints.
-- **Protected Frontend Routes**: Client-side route guards complement backend API protection.
-- **Input Validation**: Pydantic schema validation at API boundaries prevents unexpected payloads.
-- **Attachment Validation**: Restricted to `.png`, `.jpg`, `.jpeg`, `.pdf` with UUID storage and `os.path.realpath` path traversal checks.
-- **Environment Secrets**: Sensitive keys stored in `.env`, excluded from Git version control.
-- **CORS Filtering**: Explicit allowed origins configured for cross-origin security.
+Create a `.env` file in `backend/` using the following environment variable names:
+
+```env
+DATABASE_URL=
+JWT_SECRET_KEY=
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=60
+CORS_ORIGINS=
+EMAIL_ADDRESS=
+EMAIL_PASSWORD=
+SMTP_SERVER=
+SMTP_PORT=
+```
 
 ---
 
-## ✅ Project Status
+## 📂 Project Structure
 
-**Current Status**: `Feature Complete / Portfolio Ready`
+```text
+AI-Telecom-Customer-Support-Portal/
+│
+├── ai-support-system-frontend/     # React 18 + Vite Frontend Application
+│   ├── public/                     # Static icons and assets
+│   ├── src/                        # React components, pages, context & services
+│   │   ├── components/             # Reusable UI cards, buttons, navbar & chat window
+│   │   ├── context/                # AuthContext & state providers
+│   │   ├── pages/                  # Customer, Engineer, Admin, and Auth pages
+│   │   ├── services/               # Axios httpClient, API services, AI engine
+│   │   ├── App.jsx                 # Router configuration
+│   │   └── main.jsx                # React entry point
+│   ├── package.json                # Dependencies and build scripts
+│   └── vite.config.js              # Vite build configuration
+│
+├── backend/                        # FastAPI Backend Application
+│   ├── app/                        # Application core
+│   │   ├── api/                    # API Routers (auth, users, tickets, chat, feedback, analytics)
+│   │   ├── auth/                   # JWT handler, password hashing & dependencies
+│   │   ├── config/                 # Pydantic settings configuration
+│   │   ├── database/               # SQLAlchemy session & base models
+│   │   ├── models/                 # ORM Models (User, Ticket, ChatMessage, Attachment, Feedback)
+│   │   ├── schemas/                # Pydantic validation schemas
+│   │   └── services/               # Email service helper
+│   ├── tests/                      # Pytest automated test suite
+│   ├── uploads/                    # Ticket file attachments directory (.gitkeep)
+│   ├── .env.example                # Safe environment variable template
+│   ├── main.py                     # FastAPI entry point & database seeder
+│   └── requirements.txt            # Python dependencies
+│
+├── docs/                           # Documentation assets and screenshots
+├── .gitignore                      # Git exclusion rules
+├── LICENSE                         # MIT License
+└── README.md                       # Project documentation
+```
 
-- [x] Customer Portal (`/dashboard`)
-- [x] Engineer Portal (`/engineer/dashboard`)
-- [x] Admin Portal (`/admin/dashboard`)
-- [x] Universal Single Sign-On Authentication
-- [x] Role-Based Access Control (RBAC) & JWT Security
-- [x] SIM Support Ticket Lifecycle (Create, Query, Assign, Resolve)
-- [x] TeleCare AI Assistant (SIM-only scope)
-- [x] Real-time WebSockets Chat (`/api/chat/ws/{id}`)
-- [x] Secure File Attachments with Path Traversal Protection
-- [x] Customer Rating & Feedback System
-- [x] Admin Analytics & Engineer Workload Reporting
-- [x] Pytest Automated Test Suite (`6/6 passed`)
-- [x] Production Documentation & GitHub Release
+---
+
+## 👥 Team Contributions
+
+| Member | Role | Responsibilities & Key Contributions |
+| :--- | :--- | :--- |
+| **Katta Durga Sharan Teja** | Backend Developer | Developed FastAPI backend, REST APIs, PostgreSQL database integration, JWT authentication, Role-Based Access Control (RBAC), ticket management APIs, engineer assignment workflows, file attachment security, analytics APIs, backend deployment on Render, and testing. |
+| **Kanuri Yaswanth Kumar** | Frontend Developer | Built React/Vite frontend, Customer Portal, Engineer Portal, Admin Portal, UI/UX design system, dark telecom layout, responsive components, and frontend API integration. |
+| **Baddireddi Satya Vinay** | AI & Integration Engineer | Designed TeleCare AI Assistant, SIM-only support logic, conversational fallback handling, frontend-backend API integration, end-to-end workflow testing, debugging, and validation. |
+
+---
+
+## 🧪 Production Acceptance Test Results
+
+The full application underwent a comprehensive **Final Production Acceptance Test** against the live production deployment (`https://telecare-ai.onrender.com`), achieving a **100% PASS rate**:
+
+- **Authentication**: `PASS` (JWT Bearer tokens generated and verified).
+- **Customer Dashboard**: `PASS` (Ticket list, metrics, and profile loading).
+- **Ticket Creation**: `PASS` (SIM tickets created with `HTTP 201`; invalid categories rejected with `HTTP 400`).
+- **Ticket Lifecycle**: `PASS` (Complete Open → In Progress → Resolved → Feedback lifecycle verified).
+- **Admin Workflow**: `PASS` (User listings and engineer assignment verified).
+- **Engineer Workflow**: `PASS` (Assigned tickets visible; status updates & investigation notes saved).
+- **AI Assistant**: `PASS` (SIM troubleshooting & polite non-SIM query redirection verified).
+- **AI Action Buttons**: `PASS` (Interactive action buttons render and execute workflows).
+- **WebSocket Messaging**: `PASS` (`wss://` protocol stream with automatic REST polling fallback).
+- **Network Audit**: `PASS` (Zero production calls to local development addresses).
+- **Browser Console**: `PASS` (0 JavaScript runtime errors; 2,444 modules compiled cleanly).
+- **Responsive UI**: `PASS` (Tested desktop, tablet, and mobile layouts).
+- **RBAC**: `PASS` (Customers blocked from admin routes with `HTTP 403 Forbidden`).
+- **Backend Health**: `PASS` (`/health` returns `HTTP 200 OK` with `{"status":"healthy","service":"TeleCare-AI"}`).
+- **Production Build**: `PASS` (`npm run build` status 0).
+
+---
+
+## 🎥 Recommended Demo Walkthrough
+
+Follow this 2–3 minute workflow to demonstrate the full application:
+
+1. **Sign In as Customer**: Log in using `customer` / `customerpassword` at `/`.
+2. **Open Customer Dashboard**: View active ticket summary and click **"+ Create Support Ticket"**.
+3. **Launch AI Assistant**: Open **"Ask AI Support"** (`/dashboard/chat`), type `"I lost my SIM"`, and observe automated guidance and formatted action buttons.
+4. **Click Action Button**: Click **"Request Replacement"** to open ticket creation with pre-filled category.
+5. **Create Support Ticket**: Submit a ticket with Title `"SIM has no signal"`, Category `"SIM Not Working"`, Priority `"High"`.
+6. **Sign In as Admin**: Log out and sign in as `admin` / `adminpassword`.
+7. **Assign Engineer**: Open **Admin Tickets** (`/admin/tickets`), locate the new unassigned ticket, click **"Assign Ticket"**, select `engineer`, and confirm.
+8. **Sign In as Engineer**: Log out and sign in as `engineer` / `engineerpassword`.
+9. **Engineer Resolution**: Open **Engineer Dashboard** (`/engineer/dashboard`), open the assigned ticket, add investigation notes, and set status to **"Resolved"**.
+10. **Customer Feedback**: Log back in as `customer`, open the resolved ticket, and submit a 5-star rating review.
+11. **Admin Analytics**: Log in as `admin` and open **Analytics** (`/admin/analytics`) to observe updated ticket resolution charts and rating distributions.
+
+---
+
+## 📸 Screenshots
+
+Application screenshots demonstrate each user portal and workflow:
+
+- **Login Screen**: Universal Multi-Role Single Sign-On (`/`)
+- **Customer Portal**: Dashboard, Ticket Creation, My Tickets, AI Assistant, Profile
+- **Admin Portal**: Admin Dashboard, Engineer Assignment, User Management, Analytics
+- **Engineer Portal**: Engineer Dashboard, Assigned Tickets, Investigation Notes
+
+*(Screenshots can be added to the `docs/screenshots/` directory)*
 
 ---
 
