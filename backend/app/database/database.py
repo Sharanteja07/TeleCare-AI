@@ -7,12 +7,13 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./telecom_support.db")
 
-if not DATABASE_URL:
-    raise ValueError("DATABASE_URL is not set in the .env file")
+# Convert legacy postgres:// to postgresql:// if needed for SQLAlchemy 2.0+
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-# SQLite support
+# SQLite specific connect_args
 connect_args = {}
 if DATABASE_URL.startswith("sqlite"):
     connect_args = {"check_same_thread": False}

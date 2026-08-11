@@ -61,19 +61,19 @@ def health_check_smtp():
         missing_configs.append("EMAIL_PASSWORD")
 
     if missing_configs:
-        logger.error(f"SMTP Health Check: Missing configuration variables: {', '.join(missing_configs)}")
+        logger.info(f"SMTP Service: Optional configuration variables missing ({', '.join(missing_configs)}). Email notifications will run in console fallback mode.")
         return
 
     if not is_smtp_configured():
-        logger.warning(
-            "SMTP Health Check: Invalid or placeholder credentials detected. "
+        logger.info(
+            "SMTP Service: Placeholder credentials detected. "
             "Emails will NOT be sent. The application will fall back to printing OTPs to the console."
         )
         return
 
     try:
         logger.info(f"SMTP Test Connection - Server: '{SMTP_SERVER}', Port: {SMTP_PORT}, Username: '{EMAIL_ADDRESS}'")
-        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=10)
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=5)
         server.ehlo()
         server.starttls()
         server.ehlo()
@@ -81,7 +81,7 @@ def health_check_smtp():
         server.quit()
         logger.info("SMTP Connection Successful")
     except Exception as exc:
-        logger.error(f"SMTP Connection Failed. Exact Error: {exc}")
+        logger.warning(f"SMTP Connection Failed. Exact Error: {exc}")
 
 from contextlib import asynccontextmanager
 
@@ -100,7 +100,7 @@ app = FastAPI(
 # Configure CORS for smooth frontend integration
 import os
 
-ALLOWED_ORIGINS_ENV = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175")
+ALLOWED_ORIGINS_ENV = os.getenv("CORS_ORIGINS") or os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175")
 allowed_origins_list = [origin.strip() for origin in ALLOWED_ORIGINS_ENV.split(",") if origin.strip()]
 
 app.add_middleware(
@@ -129,3 +129,14 @@ def read_root():
         "docs_url": "/docs",
         "redoc_url": "/redoc"
     }
+
+@app.get("/health")
+@app.get("/api/health")
+def health_check():
+    return {
+        "status": "healthy",
+        "service": "TeleCare-AI"
+    }
+
+
+
