@@ -389,19 +389,44 @@ Follow this 2–3 minute workflow to demonstrate the full application:
 
 ---
 
-## 📸 Screenshots
+## 📸 Application Screenshots
 
-Application screenshots demonstrate each user portal and workflow:
+### 1. Universal Login Page
+![Universal Single Sign-On Login](docs/screenshots/01-login.png)
 
-- **Login Screen**: Universal Multi-Role Single Sign-On (`/`)
-- **Customer Portal**: Dashboard, Ticket Creation, My Tickets, AI Assistant, Profile
-- **Admin Portal**: Admin Dashboard, Engineer Assignment, User Management, Analytics
-- **Engineer Portal**: Engineer Dashboard, Assigned Tickets, Investigation Notes
+### 2. Customer Dashboard
+![Customer Dashboard & SIM Tickets](docs/screenshots/02-customer-dashboard.png)
 
-*(Screenshots can be added to the `docs/screenshots/` directory)*
+### 3. TeleCare AI Assistant & Action Buttons
+![TeleCare AI Assistant & Interactive Action Buttons](docs/screenshots/03-ai-assistant.png)
+
+### 4. Create SIM Support Ticket
+![Create SIM Support Ticket Form](docs/screenshots/04-create-ticket.png)
+
+### 5. Customer Ticket Details View
+![Customer Ticket Details & Activity History](docs/screenshots/05-customer-ticket.png)
+
+### 6. Admin Portal Dashboard
+![Admin Dashboard & Unassigned Tickets](docs/screenshots/06-admin-dashboard.png)
+
+### 7. Support Engineer Assignment Modal
+![Admin Support Engineer Assignment Modal](docs/screenshots/07-ticket-assignment.png)
+
+### 8. Support Engineer Workspace
+![Support Engineer Dashboard](docs/screenshots/08-engineer-dashboard.png)
+
+### 9. Engineer Investigation Details
+![Engineer Investigation & Diagnostic Notes](docs/screenshots/09-engineer-ticket.png)
+
+### 10. Admin System Analytics & Customer Satisfaction
+![System Analytics & CSAT Reports](docs/screenshots/10-analytics.png)
+
+### 11. OpenAPI Swagger Documentation
+![FastAPI Interactive Swagger Docs](docs/screenshots/11-swagger-api.png)
 
 ---
 
 ## 📄 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
