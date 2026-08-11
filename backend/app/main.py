@@ -91,7 +91,7 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(
-    title="AI Telecom Customer Support Portal API",
+    title="TeleCare AI",
     description="Backend API for customer support tickets, AI chat assistance, feedback, and analytics.",
     version="1.0.0",
     lifespan=lifespan
