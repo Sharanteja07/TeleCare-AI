@@ -54,7 +54,7 @@ def test_auth_flow():
         json={
             "title": "Slow Internet Connection",
             "description": "My internet speed is less than 5 Mbps instead of 100 Mbps.",
-            "category": "Network",
+            "category": "SIM Not Working",
             "priority": "High"
         },
         headers=headers
@@ -144,7 +144,7 @@ def test_engineer_ticket_visibility():
         json={
             "title": "Engineer Visibility Test",
             "description": "Ticket should remain hidden to engineer until assigned.",
-            "category": "Network",
+            "category": "SIM Not Working",
             "priority": "Medium"
         },
         headers=cust_headers
