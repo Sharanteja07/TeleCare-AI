@@ -100,7 +100,7 @@ app = FastAPI(
 # Configure CORS for smooth frontend integration
 import os
 
-ALLOWED_ORIGINS_ENV = os.getenv("CORS_ORIGINS") or os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175")
+ALLOWED_ORIGINS_ENV = os.getenv("CORS_ORIGINS") or os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175,https://telecare-ai.vercel.app")
 allowed_origins_list = [origin.strip() for origin in ALLOWED_ORIGINS_ENV.split(",") if origin.strip()]
 
 app.add_middleware(
